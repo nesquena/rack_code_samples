@@ -1,15 +1,14 @@
 class MyApp
   def call(env)
-    # http://rack.rubyforge.org/doc/classes/Rack/Request.html
     request = Rack::Request.new(env)
-    # http://rack.rubyforge.org/doc/classes/Rack/Response.html
-    Rack::Response.new { |response|
-      response.write("<h1>Request Object</h1>")
-      response.write("<b>URL:</b> #{request.url}")
-      response.write("<br/><b>Path Info:</b> #{request.path_info}")
-      response.write("<br/><b>Request Method:</b> #{request.request_method}")
-      response.write("<br/><b>Params:</b> #{request.params.inspect}")
-    }.finish
+    response = Rack::Response.new
+    response.write("<h1>Response from Basic 6</h1>")
+    case request.path_info
+      when "/" then response.write('Path is on root')
+      when "/banana" then response.write('I want a banana')
+      else response.write("Path is #{request.path_info}")
+    end
+    response.finish
   end
 end
 
