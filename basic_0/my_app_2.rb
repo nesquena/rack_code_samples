@@ -13,5 +13,4 @@ builder = Rack::Builder.new {
   run MyApp2.new
 }
 
-# Rack::Handler::Mongrel.run MyApp.new, :Port => 3000
 Rack::Handler::Mongrel.run builder, :Port => 3000
